@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "commander": "^14.0.1"
+  },
+  "name": "read-linux",
+  "version": "1.0.0",
+  "description": "Простая реализация утилиты `cat` на Node.js, которая работает как нативная команда Linux.",
+  "main": "index.js",
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node --watch src/index.ts",
+    "build": "tsc",
+    "serve": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1234445666666/read-linux.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/1234445666666/read-linux/issues"
+  },
+  "homepage": "https://github.com/1234445666666/read-linux#readme"
+}
