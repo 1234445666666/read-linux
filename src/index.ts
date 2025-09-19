@@ -17,29 +17,29 @@ async function main() {
     .version("14.0.1")
     .option("-b , --babosh", "use babosh")
     .argument("[files...]", "files to process")
-    .action(async (files, options) => {
+    .action(async (files: string[], options) => {
       try {
-        console.log(options);
-        if (options.babosh) {
-          console.log("BABOSH MODE ACTIVATED!");
-        } else {
-          console.log("Normal mode");
-        }
         files.forEach((file: string) => {
           const absolutePath = path.resolve(file);
           fs.readFile(absolutePath, "utf-8").then((data) => {
+            console.log(chalk.blue.bold("File content:"));
             console.log(chalk.white.italic(data));
             const lines = data.split("\n");
             console.log(chalk.green.bold(lines.length, `Lines in ${file}`));
+            fs.stat(absolutePath)
+              .then((stats) => {
+                console.log(chalk.green.bold(stats.size, `Bytes in ${file}`));
+              })
+              .catch((error) => {
+                console.log(chalk.red.bold("error"));
+              });
           });
-          fs.stat(absolutePath)
-            .then((stats) => {
-              console.log(chalk.green.bold(stats.size, `Bytes in ${file}`));
-            })
-            .catch((error) => {
-              console.log(chalk.red.bold("error"));
-            });
         });
+        if (options.babosh) {
+          console.log(chalk.red.bold("Babosh mode"));
+        } else {
+          console.log("Normal mode");
+        }
       } catch (error) {
         console.log(chalk.red.bold("File not found:", files));
       }
