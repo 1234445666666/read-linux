@@ -30,11 +30,11 @@ npm install
 # 2. Дайте права на выполнение
 chmod +x bin/read.sh
 
-# 3. Добавьте алиас в .bashrc
-echo 'alias read="'"$(pwd)"'/read.sh"' >> ~/.bashrc
+# 3. Добавьте алиас в .zshrc
+echo 'alias read="'"$(pwd)"'/bin/read.sh"' >> ~/.zshrc
 
 # 4. Обновите конфигурацию
-source ~/.bashrc
+ source ~/.zshrc
 ```
 
 ## Использование
