@@ -15,7 +15,8 @@ async function main() {
     .name("read")
     .description("Node.ts implementation of cat command")
     .version("14.0.1")
-    .option("-b , --babosh", "use babosh")
+    .option("-l , --lines", "use lines")
+    .option("-n , --number", "use number")
     .argument("[files...]", "files to process")
     .action(async (files: string[], options) => {
       try {
@@ -23,9 +24,6 @@ async function main() {
           const absolutePath = path.resolve(file);
           fs.readFile(absolutePath, "utf-8").then((data) => {
             console.log(chalk.blue.bold("File content:"));
-            console.log(chalk.white.italic(data));
-            const lines = data.split("\n");
-            console.log(chalk.green.bold(lines.length, `Lines in ${file}`));
             fs.stat(absolutePath)
               .then((stats) => {
                 console.log(chalk.green.bold(stats.size, `Bytes in ${file}`));
@@ -33,13 +31,19 @@ async function main() {
               .catch((error) => {
                 console.log(chalk.red.bold("error"));
               });
+            if (options.lines) {
+              const lines = data.split("\n");
+              console.log(chalk.green.bold(lines.length, `Lines in ${file}`));
+            } else if (options.number) {
+              const lines = data.split("\n");
+              lines.forEach((line, index) => {
+                console.log(chalk.green.bold(index + 1, line));
+              });
+            } else {
+              console.log(chalk.white.italic(data));
+            }
           });
         });
-        if (options.babosh) {
-          console.log(chalk.red.bold("Babosh mode"));
-        } else {
-          console.log("Normal mode");
-        }
       } catch (error) {
         console.log(chalk.red.bold("File not found:", files));
       }
