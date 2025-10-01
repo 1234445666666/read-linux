@@ -4,3 +4,4 @@ PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 NODE_SCRIPT="$PROJECT_ROOT/src/index.ts"
 
 exec npx ts-node "$NODE_SCRIPT" "$@"
+

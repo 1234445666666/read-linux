@@ -47,13 +47,6 @@ read file.txt
 
 # Чтение нескольких файлов
 read file1.txt file2.txt file3.txt
-
-# Чтение из стандартного ввода
-echo "Hello World" | read
-
-# Комбинирование с другими команды
-ls -la | read
-find . -name "*.txt" | read
 ```
 
 ## Примеры
@@ -62,12 +55,6 @@ find . -name "*.txt" | read
 # Просмотр содержимого файла
 read document.txt
 
-# Объединение нескольких файлов
-read part1.txt part2.txt > combined.txt
-
-# Использование в пайпах
-cat largefile.txt | read | grep "searchterm"
-
-# С нумерацией строк (если реализовано)
-read -n code.js
+# Показ байтов
+read -b code.js
 ```

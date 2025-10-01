@@ -1,10 +1,5 @@
-import { program } from "commander";
 import chalk from "chalk";
-import ora from "ora";
 import { promises as fs } from "fs";
-import path from "path";
-import boxen from "boxen";
-import Table from "cli-table";
 
 export function consoleFileContent(file: string) {
   console.log(chalk.blue.bold("File content:"));
@@ -13,13 +8,18 @@ export function consoleFileContent(file: string) {
 
     lines.forEach((line, index) => {
       const lineNumber = chalk.gray(`${(index + 1).toString().padStart(4)} │ `);
-      console.log(lineNumber + chalk.white(line));
+      console.log(lineNumber + chalk.white.bold(line));
     });
   });
 }
 
 export function consoleBytes(file: string, bytes: number): void {
-  console.log(chalk.green.bold(bytes, `Bytes in ${file}`));
+  try {
+    console.log(chalk.green.bold(bytes, `Bytes in ${file}`));
+  } catch (error) {
+    consoleError("File not found: " + file);
+    return;
+  }
 }
 
 export function consoleError(message: string): void {
